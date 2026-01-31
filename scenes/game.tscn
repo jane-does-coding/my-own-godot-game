@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cj2ib52ik2rhp"]
+[gd_scene load_steps=33 format=3 uid="uid://cj2ib52ik2rhp"]
 
 [ext_resource type="Texture2D" uid="uid://crcoyii6s5npn" path="res://assets/sprites/TX Tileset Ground.png" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cmuyr18o12cls" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://hu00jgukr8fd" path="res://assets/sprites/bg.png" id="7_trtic"]
 [ext_resource type="Texture2D" uid="uid://bnmv6x6dvpe1i" path="res://assets/sprites/cloud6.png" id="8_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://bcxow31xsewtj" path="res://assets/sprites/cloud5.png" id="9_264po"]
+[ext_resource type="Script" uid="uid://cp1edaryni1ek" path="res://scripts/game_manager.gd" id="16_ca42v"]
+[ext_resource type="PackedScene" uid="uid://bcadwwpjgvv76" path="res://scenes/coin.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ir15t"]
 texture = ExtResource("1_gee14")
@@ -12796,3 +12798,16 @@ position = Vector2(42, 42)
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, -14)
 zoom = Vector2(4, 4)
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("16_ca42v")
+
+[node name="ScoreLabel" type="Label" parent="GameManager"]
+offset_left = 6.0
+offset_top = -44.0
+offset_right = 168.0
+offset_bottom = -21.0
+text = "You collected X coins"
+
+[node name="coin" parent="." instance=ExtResource("17_rysoc")]
+position = Vector2(108, 152)
