@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cj2ib52ik2rhp"]
+[gd_scene load_steps=34 format=3 uid="uid://cj2ib52ik2rhp"]
 
 [ext_resource type="Texture2D" uid="uid://crcoyii6s5npn" path="res://assets/sprites/TX Tileset Ground.png" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cmuyr18o12cls" path="res://scenes/player.tscn" id="1_uwrxv"]
@@ -15,7 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://hu00jgukr8fd" path="res://assets/sprites/bg.png" id="7_trtic"]
 [ext_resource type="Texture2D" uid="uid://bnmv6x6dvpe1i" path="res://assets/sprites/cloud6.png" id="8_ssvqc"]
 [ext_resource type="Texture2D" uid="uid://bcxow31xsewtj" path="res://assets/sprites/cloud5.png" id="9_264po"]
-[ext_resource type="Script" uid="uid://68gnfsroo2bl" path="res://scripts/area_2d.gd" id="16_ca42v"]
+[ext_resource type="PackedScene" uid="uid://bcadwwpjgvv76" path="res://scenes/coin.tscn" id="16_ca42v"]
+[ext_resource type="PackedScene" uid="uid://b57g6fs2hlif7" path="res://scenes/killzone.tscn" id="17_rysoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ir15t"]
 texture = ExtResource("1_gee14")
@@ -12773,8 +12774,7 @@ sources/19 = SubResource("TileSetAtlasSource_e1j6l")
 sources/20 = SubResource("TileSetAtlasSource_pl11u")
 sources/21 = SubResource("TileSetAtlasSource_bhx41")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rysoc"]
-size = Vector2(29, 58)
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ssvqc"]
 
 [node name="Game" type="Node2D"]
 
@@ -12800,14 +12800,18 @@ position = Vector2(42, 42)
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, -14)
 zoom = Vector2(4, 4)
+limit_bottom = 600
+limit_smoothed = true
 
-[node name="Area2D" type="Area2D" parent="."]
-position = Vector2(2706, -321)
-script = ExtResource("16_ca42v")
+[node name="Coin" parent="." instance=ExtResource("16_ca42v")]
+position = Vector2(84, 70)
+
+[node name="Coin2" parent="." instance=ExtResource("16_ca42v")]
+position = Vector2(89, 152)
+
+[node name="Killzone" parent="." instance=ExtResource("17_rysoc")]
+position = Vector2(0, 508)
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-2.5, 4)
-shape = SubResource("RectangleShape2D_rysoc")
-
-[connection signal="body_entered" from="Area2D" to="player" method="_on_area_2d_body_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+shape = SubResource("WorldBoundaryShape2D_ssvqc")
